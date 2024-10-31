@@ -1,0 +1,37 @@
+version: '3.8'
+
+volumes:
+  postgres-data:
+  
+services:
+  postgres:
+    build: ./db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: social
+    ports:
+    - 5432:5432
+    expose:
+      - 5432
+    restart: unless-stopped
+    volumes:
+        - postgres-data:/var/lib/postgresql/data
+  web:
+    depends_on: 
+      - postgres
+    build: ./web
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=compose
+    ports:
+    - 3003:3003
+
+  io:
+    build: ./io
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=compose
+    ports:
+    - 3004:3004
+    

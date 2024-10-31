@@ -1,0 +1,19 @@
+{
+    "app": {
+        "port": 3003,
+        "secret": "MySecret",
+        "jwtSecret": "MyJwtSecret"
+    },
+    "postgres": {
+        "dialectOptions": {},
+        "logging": false,
+        "dialect": "postgres",
+        "database": "social",
+        "username": "admin",
+        "password": "password",
+        "host": "127.0.0.1"
+    },
+    "io": {
+        "server": "ws://localhost:3004"
+    }
+}
