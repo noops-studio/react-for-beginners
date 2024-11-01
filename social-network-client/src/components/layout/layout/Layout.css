@@ -1,0 +1,38 @@
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.Layout {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 6fr 1fr;
+    grid-template-rows: 1fr 6fr 1fr;
+}
+
+.Layout header {
+    grid-row: 1;
+    grid-column: 1 / span 3;
+}
+
+.Layout #follows {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.Layout main {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.Layout #comments {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.Layout footer {
+    grid-row: 3;
+    grid-column: 1 / span 3;
+}
+
