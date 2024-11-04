@@ -2,6 +2,7 @@ import Comments from '../comments/Comments'
 import Follows from '../follows/Follows'
 import Footer from '../footer/Footer'
 import Header from '../header/Header'
+import Routing from '../routing/Routing'
 import './Layout.css'
 
 function Layout(): JSX.Element {
@@ -14,7 +15,7 @@ function Layout(): JSX.Element {
                 <Follows />
             </aside>
             <main>
-                main
+                <Routing />
             </main>
             <aside id="comments">
                 <Comments />
