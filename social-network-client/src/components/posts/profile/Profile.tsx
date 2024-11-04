@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import './Profile.css'
 import profileService from '../../../services/profileService'
-import Post from '../../../models/Post'
+import PostModel from '../../../models/Post'
+import Post from '../post/Post'
 
 function Profile(): JSX.Element {
 
-    const [ posts, setPosts ] = useState<Post[]>([])
+    const [ posts, setPosts ] = useState<PostModel[]>([])
 
     useEffect(() => {
         (async() => {
@@ -16,31 +17,21 @@ function Profile(): JSX.Element {
 
     return (
         <div className='Profile'>
-            <table>
-                <thead>
-                    <tr>
-                        <th>title</th>
-                        <th>image</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {posts.map(post => <PostRow key={post.id} post={post}/>)}
-                </tbody>
-            </table>
+            {posts.map(post => <Post key={post.id} post={post}/>)}
         </div>
     )
 }
 
-interface PostRowProps {
-    post: Post
-}
-function PostRow(props: PostRowProps): JSX.Element {
-    return (
-        <tr>
-            <td>{props.post.title}</td>
-            <td><img src={props.post.imageUrl} alt=""/></td>
-        </tr>
-    )
-}
+// interface PostRowProps {
+//     post: Post
+// }
+// function PostRow(props: PostRowProps): JSX.Element {
+//     return (
+//         <tr>
+//             <td>{props.post.title}</td>
+//             <td><img src={props.post.imageUrl} alt=""/></td>
+//         </tr>
+//     )
+// }
 
 export default Profile
