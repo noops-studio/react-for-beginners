@@ -1,8 +1,8 @@
-export default interface Post{
+import PostDraft from "./PostDraft";
+
+export default interface Post extends PostDraft{
     id: string,
     userId: string,
-    title: string,
-    body: string,
     imageUrl: string,
     createdAt: Date,
     updatedAt: Date

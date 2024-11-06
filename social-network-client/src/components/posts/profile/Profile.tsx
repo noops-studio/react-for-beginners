@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import './Profile.css'
 import profileService from '../../../services/profileService'
-import PostModel from '../../../models/Post'
+import PostModel from '../../../models/post/Post'
 import Post from '../post/Post'
+import NewPost from '../new/NewPost'
 
 function Profile(): JSX.Element {
 
@@ -33,6 +34,7 @@ function Profile(): JSX.Element {
 
     return (
         <div className='Profile'>
+            <NewPost />
             {posts.map(post => <Post key={post.id} post={post} removePost={removePost}/>)}
         </div>
     )

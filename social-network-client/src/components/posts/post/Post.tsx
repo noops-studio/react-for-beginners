@@ -1,5 +1,5 @@
 import './Post.css'
-import PostModel from '../../../models/Post'
+import PostModel from '../../../models/post/Post'
 import profileService from '../../../services/profileService'
 
 interface PostProps {
