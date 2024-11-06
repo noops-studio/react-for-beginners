@@ -21,7 +21,7 @@ const sequelize = new Sequelize({
     ...config.get('postgres'),
     models: [__dirname + '/models']
 });
-// sequelize.sync({force: true})
+sequelize.sync()
 
 app.use(cors())
 app.use(json())

@@ -3,6 +3,7 @@ import Post from './Post';
 import User from './User';
 @Table({
     underscored: true,
+    timestamps: true,
 })
 export default class Comment extends Model {
     @PrimaryKey
@@ -24,7 +25,10 @@ export default class Comment extends Model {
     @BelongsTo(() => User)
     user: User
 
-    @BelongsTo(() => Post)
+    @BelongsTo(() => Post, {
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+    })
     post: Post
 
 }
