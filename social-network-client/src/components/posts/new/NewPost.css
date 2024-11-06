@@ -1,3 +1,8 @@
 .NewPost {
     margin-bottom: 20px;
 }
+
+.NewPost form {
+    display: flex;
+    flex-direction: column;
+}
