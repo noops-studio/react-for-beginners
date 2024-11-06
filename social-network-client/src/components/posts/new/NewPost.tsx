@@ -1,19 +1,17 @@
 import { useForm } from 'react-hook-form'
 import './NewPost.css'
 import PostDraft from '../../../models/post/PostDraft';
-import profileService from '../../../services/profileService';
 
-function NewPost(): JSX.Element {
+interface NewPostProps {
+    createPost: Function
+}
+function NewPost(props: NewPostProps): JSX.Element {
 
-    const { register, handleSubmit } = useForm<PostDraft>();
+    const { register, handleSubmit, reset } = useForm<PostDraft>();
 
     async function submit(draft: PostDraft) {
-        console.log(draft)
-        try {
-            // const newPost = await profileService.create(draft)
-        } catch (e) {
-            alert(e)
-        }
+        await props.createPost(draft)
+        reset()
     }
 
     return (

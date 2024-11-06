@@ -4,6 +4,7 @@ import profileService from '../../../services/profileService'
 import PostModel from '../../../models/post/Post'
 import Post from '../post/Post'
 import NewPost from '../new/NewPost'
+import PostDraft from '../../../models/post/PostDraft'
 
 function Profile(): JSX.Element {
 
@@ -32,9 +33,18 @@ function Profile(): JSX.Element {
         }
     }
 
+    async function createPost(draft: PostDraft) {
+        try {
+            const newPost = await profileService.create(draft)
+            setPosts([newPost, ...posts])
+        } catch (e) {
+            alert(e)
+        }
+    }
+
     return (
         <div className='Profile'>
-            <NewPost />
+            <NewPost createPost={createPost}/>
             {posts.map(post => <Post key={post.id} post={post} removePost={removePost}/>)}
         </div>
     )
