@@ -61,12 +61,21 @@ export async function create(req: Request, res: Response, next: NextFunction) {
         imageUrl: 'http://mypic.com'
     })
 
-    const user = await User.findByPk(userId)
+    await post.reload({
+        include: [
+            {
+                model: Comment,
+                include: [User]
+            }, 
+            User
+        ]
+    })
+    // const user = await User.findByPk(userId)
     
     req.ioSocket.emit('new_post', {
         ...post.get({plain: true}), 
-        user: user.get({plain: true}),
-        comments: []
+        // user: user.get({plain: true}),
+        // comments: []
     })
     res.json(post)
 }
