@@ -10,14 +10,30 @@ function Profile(): JSX.Element {
 
     useEffect(() => {
         (async() => {
-            const postsFromServer = await profileService.getProfile()
-            setPosts(postsFromServer)
+            try {
+                const postsFromServer = await profileService.getProfile()
+                setPosts(postsFromServer)
+            } catch (e) {
+                alert(e)
+            }
         })()
     }, [])
 
+    async function removePost(id: string) {
+        try {
+            await profileService.remove(id)
+            const postsAfterDeletion = [...posts]
+            const deleteIndex = postsAfterDeletion.findIndex(post => post.id === id)
+            postsAfterDeletion.splice(deleteIndex, 1)
+            setPosts(postsAfterDeletion)
+        } catch (e) {
+            alert(e)
+        }
+    }
+
     return (
         <div className='Profile'>
-            {posts.map(post => <Post key={post.id} post={post}/>)}
+            {posts.map(post => <Post key={post.id} post={post} removePost={removePost}/>)}
         </div>
     )
 }
