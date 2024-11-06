@@ -1,31 +1,14 @@
--- public."comments" definition
-
--- Drop table
-
--- DROP TABLE public."comments";
-
-CREATE TABLE public."comments" (
+-- users
+CREATE TABLE public.users (
 	id varchar(255) NOT NULL,
-	post_id varchar(255) NULL,
-	user_id varchar(255) NULL,
-	body varchar(255) NOT NULL,
+	"name" varchar(255) NOT NULL,
+	username varchar(255) NOT NULL,
+	"password" varchar(255) NOT NULL,
 	created_at timestamptz NOT NULL,
 	updated_at timestamptz NOT NULL,
-	CONSTRAINT comments_pkey PRIMARY KEY (id)
+	CONSTRAINT users_pkey PRIMARY KEY (id)
 );
-
-
--- public."comments" foreign keys
-
-ALTER TABLE public."comments" ADD CONSTRAINT comments_post_id_fkey FOREIGN KEY (post_id) REFERENCES public.posts(id) ON UPDATE CASCADE;
-ALTER TABLE public."comments" ADD CONSTRAINT comments_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON UPDATE CASCADE;
-
--- public.follows definition
-
--- Drop table
-
--- DROP TABLE public.follows;
-
+-- follows
 CREATE TABLE public.follows (
 	follower_id varchar(255) NOT NULL,
 	followee_id varchar(255) NULL,
@@ -35,18 +18,10 @@ CREATE TABLE public.follows (
 	CONSTRAINT follows_pkey PRIMARY KEY (follower_id, followee_id)
 );
 
+ALTER TABLE public.follows ADD CONSTRAINT follows_followee_id_fkey FOREIGN KEY (followee_id) REFERENCES public.users(id) ON DELETE CASCADE ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE public.follows ADD CONSTRAINT follows_follower_id_fkey FOREIGN KEY (follower_id) REFERENCES public.users(id) ON DELETE CASCADE ON UPDATE CASCADE ON DELETE CASCADE;
 
--- public.follows foreign keys
-
-ALTER TABLE public.follows ADD CONSTRAINT follows_followee_id_fkey FOREIGN KEY (followee_id) REFERENCES public.users(id) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE public.follows ADD CONSTRAINT follows_follower_id_fkey FOREIGN KEY (follower_id) REFERENCES public.users(id) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- public.posts definition
-
--- Drop table
-
--- DROP TABLE public.posts;
-
+--posts
 CREATE TABLE public.posts (
 	id varchar(255) NOT NULL,
 	user_id varchar(255) NULL,
@@ -58,31 +33,21 @@ CREATE TABLE public.posts (
 	CONSTRAINT posts_pkey PRIMARY KEY (id)
 );
 
+ALTER TABLE public.posts ADD CONSTRAINT posts_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
--- public.posts foreign keys
-
-ALTER TABLE public.posts ADD CONSTRAINT posts_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON UPDATE CASCADE;
-
--- public.users definition
-
--- Drop table
-
--- DROP TABLE public.users;
-
-CREATE TABLE public.users (
+--comments
+CREATE TABLE public."comments" (
 	id varchar(255) NOT NULL,
-	"name" varchar(255) NOT NULL,
-	username varchar(255) NOT NULL,
-	"password" varchar(255) NOT NULL,
+	post_id varchar(255) NULL,
+	user_id varchar(255) NULL,
+	body varchar(255) NOT NULL,
 	created_at timestamptz NOT NULL,
 	updated_at timestamptz NOT NULL,
-	CONSTRAINT users_pkey PRIMARY KEY (id)
+	CONSTRAINT comments_pkey PRIMARY KEY (id)
 );
 
--- alter table comments
---     add constraint fk_post_id
---     foreign key (post_id) 
---     REFERENCES posts (id);
+ALTER TABLE public."comments" ADD CONSTRAINT comments_post_id_fkey FOREIGN KEY (post_id) REFERENCES public.posts(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE public."comments" ADD CONSTRAINT comments_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 -- Insert users
 INSERT INTO users (id, name, username, password,created_at,updated_at) VALUES ('4b1193cc-7ba1-462c-99c5-2e3ea4ab6d14', 'Alice', 'alice0', '7f7737fddd2842bc2afdbf1868aaa8e986b83133a1f010fe96535c15e4584628',NOW(),NOW());
