@@ -7,11 +7,6 @@ class ProfileService {
         const posts = response.data
         return posts
     }
-
-    async remove(id: string): Promise<void> {
-        await axios.delete(`${process.env.REACT_APP_REST_SERVER}/posts/${id}`)
-        return;
-    }
 }
 
 const profileService = new ProfileService()

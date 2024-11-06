@@ -10,12 +10,8 @@ function Profile(): JSX.Element {
 
     useEffect(() => {
         (async() => {
-            try {
-                const postsFromServer = await profileService.getProfile()
-                setPosts(postsFromServer)
-            } catch (e) {
-                alert(e)
-            }
+            const postsFromServer = await profileService.getProfile()
+            setPosts(postsFromServer)
         })()
     }, [])
 
