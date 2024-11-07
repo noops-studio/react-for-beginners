@@ -5,10 +5,14 @@ import PostModel from '../../../models/post/Post'
 import Post from '../post/Post'
 import NewPost from '../new/NewPost'
 import PostDraft from '../../../models/post/PostDraft'
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
+import Spinner from '../../common/spinner/Spinner'
 
 function Profile(): JSX.Element {
 
     const [ posts, setPosts ] = useState<PostModel[]>([])
+    // const posts = useAppSelector(state => state.profile)
+    // const dispatch = useAppDispatch()
 
     useEffect(() => {
         (async() => {
@@ -44,8 +48,14 @@ function Profile(): JSX.Element {
 
     return (
         <div className='Profile'>
-            <NewPost createPost={createPost}/>
-            {posts.map(post => <Post key={post.id} post={post} removePost={removePost}/>)}
+
+            {posts.length === 0 && <Spinner />}
+
+            {posts.length > 0 && <>
+                <NewPost createPost={createPost}/>
+                {posts.map(post => <Post key={post.id} post={post} removePost={removePost}/>)}
+            </>}
+
         </div>
     )
 }
