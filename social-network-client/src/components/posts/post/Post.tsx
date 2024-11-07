@@ -1,6 +1,7 @@
 import './Post.css'
 import PostModel from '../../../models/post/Post'
 import profileService from '../../../services/profileService'
+import { Link } from 'react-router-dom'
 
 interface PostProps {
     post: PostModel,
@@ -21,6 +22,7 @@ function Post(props: PostProps): JSX.Element {
             <div>{props.post.body}</div>
             <div>
                 <button onClick={deleteMe}>delete</button>
+                <Link to={`/profile/edit/${props.post.id}`}>edit</Link>
             </div>
         </div>
     )
