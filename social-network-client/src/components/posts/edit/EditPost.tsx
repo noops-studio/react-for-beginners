@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import './EditPost.css'
 import profileService from '../../../services/profileService'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import PostDraft from '../../../models/post/PostDraft'
 
@@ -10,17 +10,25 @@ function EditPost(): JSX.Element {
     const { id } = useParams<'id'>()
     const { register, handleSubmit, reset, formState } = useForm<PostDraft>();
 
+    const navigate = useNavigate()
+
     useEffect(() => {
         (async() => {
             if (!id) return;
             const post = await profileService.getPost(id)
-            reset(post)
+            const {title, body} = post
+            reset({title, body})
         })()
     }, [])
 
     async function submit(draft: PostDraft) {
-        if (!id) return;
-        const updatedPost = await profileService.update(id, draft)
+        try {
+            if (!id) return;
+            const updatedPost = await profileService.update(id, draft)
+            navigate('/profile')
+        } catch (e) {
+            alert(e)
+        }
     }
 
     return (
