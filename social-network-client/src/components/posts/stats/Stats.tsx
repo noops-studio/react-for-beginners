@@ -1,25 +1,15 @@
 import { useEffect, useState } from 'react'
 import './Stats.css'
 import profileService from '../../../services/profileService'
+import { useAppSelector } from '../../../redux/hooks'
 
 function Stats(): JSX.Element {
 
-    const [ totalPosts, setTotalPosts ] = useState<number>()
-
-    useEffect(() => {
-        (async() => {
-            try {
-                const postsFromServer = await profileService.getProfile()
-                setTotalPosts(postsFromServer.length)
-            } catch (e) {
-                alert(e)
-            }
-        })() 
-    }, [])
+    const posts = useAppSelector(state => state.profile.posts)
 
     return (
         <div className='Stats'>
-            <p>total posts: {totalPosts}</p>
+            <p>total posts: {posts.length}</p>
         </div>
     )
 }

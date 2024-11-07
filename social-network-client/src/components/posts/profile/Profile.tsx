@@ -7,18 +7,25 @@ import NewPost from '../new/NewPost'
 import PostDraft from '../../../models/post/PostDraft'
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
 import Spinner from '../../common/spinner/Spinner'
+import { add, init, remove } from '../../../redux/profileSlice'
 
 function Profile(): JSX.Element {
 
-    const [ posts, setPosts ] = useState<PostModel[]>([])
-    // const posts = useAppSelector(state => state.profile)
-    // const dispatch = useAppDispatch()
+    // const [ posts, setPosts ] = useState<PostModel[]>([])
+    const posts = useAppSelector(state => state.profile.posts)
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         (async() => {
             try {
-                const postsFromServer = await profileService.getProfile()
-                setPosts(postsFromServer)
+                if(posts.length === 0 ) {
+                    const postsFromServer = await profileService.getProfile()
+                    // we won't manage our state independentally any longer
+                    // once we start using redux
+                    // redux will do it for us
+                    // setPosts(postsFromServer)
+                    dispatch(init(postsFromServer))
+                }
             } catch (e) {
                 alert(e)
             }
@@ -28,10 +35,11 @@ function Profile(): JSX.Element {
     async function removePost(id: string) {
         try {
             await profileService.remove(id)
-            const postsAfterDeletion = [...posts]
-            const deleteIndex = postsAfterDeletion.findIndex(post => post.id === id)
-            postsAfterDeletion.splice(deleteIndex, 1)
-            setPosts(postsAfterDeletion)
+            // const postsAfterDeletion = [...posts]
+            // const deleteIndex = postsAfterDeletion.findIndex(post => post.id === id)
+            // postsAfterDeletion.splice(deleteIndex, 1)
+            // setPosts(postsAfterDeletion)
+            dispatch(remove({id}))
         } catch (e) {
             alert(e)
         }
@@ -40,7 +48,8 @@ function Profile(): JSX.Element {
     async function createPost(draft: PostDraft) {
         try {
             const newPost = await profileService.create(draft)
-            setPosts([newPost, ...posts])
+            // setPosts([newPost, ...posts])
+            dispatch(add(newPost))
         } catch (e) {
             alert(e)
         }
