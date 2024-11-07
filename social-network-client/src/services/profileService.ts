@@ -24,6 +24,13 @@ class ProfileService {
         const newPost = response.data;
         return newPost
     }
+
+    async update(id: string, draft: PostDraft): Promise<Post> {
+        const response = await axios.patch<Post>(`${process.env.REACT_APP_REST_SERVER}/posts/${id}`, draft)
+        const newPost = response.data;
+        return newPost
+    }
+
 }
 
 const profileService = new ProfileService()
