@@ -6,6 +6,7 @@ import Layout from './components/layout/layout/Layout';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import Auth from './components/auth/auth/Auth';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -14,7 +15,9 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <Layout />
+        <Auth>
+          <Layout />
+        </Auth>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>
