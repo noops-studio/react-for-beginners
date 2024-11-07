@@ -8,12 +8,15 @@ import PostDraft from '../../../models/post/PostDraft'
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
 import Spinner from '../../common/spinner/Spinner'
 import { add, init, remove } from '../../../redux/profileSlice'
+import useTitle from '../../../hooks/useTitle'
 
 function Profile(): JSX.Element {
 
     // const [ posts, setPosts ] = useState<PostModel[]>([])
     const posts = useAppSelector(state => state.profile.posts)
     const dispatch = useAppDispatch()
+
+    useTitle('Profile')
 
     useEffect(() => {
         (async() => {
