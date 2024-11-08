@@ -40,6 +40,7 @@ app.use('/delay/allow/feed', allow)
 // all /allow routers should be before the auth middlewares
 app.use('/auth', authRouter)
 app.use('/delay/auth', delay, authRouter)
+app.use('/delay/allow/auth', delay, authRouter)
 
 app.use(authBearerParser({isThrowError: true}))
 app.use(auth)
