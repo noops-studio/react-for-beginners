@@ -73,7 +73,7 @@ export async function create(req: Request, res: Response, next: NextFunction) {
     // const user = await User.findByPk(userId)
     
     const ret = req.ioSocket.emit('new-post', {
-        from: req.headers['client-id'] || 'stam',
+        from: req.headers['x-client-id'] || 'stam',
         post: {...post.get({plain: true})}, 
         // user: user.get({plain: true}),
         // comments: []
