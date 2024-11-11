@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './Profile.css'
-import profileService from '../../../services/profileService'
+// import profileService from '../../../services/profileService'
 import PostModel from '../../../models/post/Post'
 import Post from '../post/Post'
 import NewPost from '../new/NewPost'
@@ -9,6 +9,9 @@ import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
 import Spinner from '../../common/spinner/Spinner'
 import { add, init, remove } from '../../../redux/profileSlice'
 import useTitle from '../../../hooks/useTitle'
+import { AuthContext } from '../../auth/auth/Auth'
+import ProfileService from '../../../services/authAware/ProfileService'
+import useService from '../../../hooks/useService'
 
 function Profile(): JSX.Element {
 
@@ -17,6 +20,8 @@ function Profile(): JSX.Element {
     const dispatch = useAppDispatch()
 
     useTitle('Profile')
+
+    const profileService = useService(ProfileService) 
 
     useEffect(() => {
         (async() => {

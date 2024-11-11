@@ -1,6 +1,8 @@
 import axios from "axios";
 import Post from "../models/post/Post";
 import PostDraft from "../models/post/PostDraft";
+import { useContext } from "react";
+import { AuthContext } from "../components/auth/auth/Auth";
 
 class ProfileService {
     async getProfile(): Promise<Post[]> {
