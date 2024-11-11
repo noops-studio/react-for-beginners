@@ -1,5 +1,8 @@
 {
     "postgres": {
         "host": "postgres"
+    },
+    "io": {
+        "server": "ws://io:3004"
     }
 }

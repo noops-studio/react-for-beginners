@@ -8,7 +8,9 @@ const server = new Server({
 })
 
 server.on('connection', (socket) => {
+    console.log('new connection')
     socket.onAny((eventName, payload) => {
+        console.log(eventName, payload)
         server.emit(eventName, payload)
     });
 });
