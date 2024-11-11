@@ -17,6 +17,9 @@ export const profileSlice = createSlice({
         init: (state, action: PayloadAction<Post[]>) => {
             state.posts = action.payload
         },
+        addOnTop: (state, action: PayloadAction<Post>) => {
+            state.posts = [action.payload, ...state.posts]
+        },
         add: (state, action: PayloadAction<Post>) => {
             state.posts.push(action.payload)
         },
@@ -31,6 +34,6 @@ export const profileSlice = createSlice({
     }
 })
 
-export const { init, add, update, remove } = profileSlice.actions
+export const { init, add, update, remove, addOnTop } = profileSlice.actions
 
 export default profileSlice.reducer

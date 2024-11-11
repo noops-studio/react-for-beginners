@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import Auth from './components/auth/auth/Auth';
+import SocketDispatcher from './components/socket/dispatcher/SocketDispatcher';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,7 +17,9 @@ root.render(
     <BrowserRouter>
       <Provider store={store}>
         <Auth>
-          <Layout />
+          <SocketDispatcher>
+            <Layout />
+          </SocketDispatcher>
         </Auth>
       </Provider>
     </BrowserRouter>
