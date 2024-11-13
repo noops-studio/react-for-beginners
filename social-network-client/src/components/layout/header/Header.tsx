@@ -24,6 +24,7 @@ function Header(): JSX.Element {
                 <NavLink to="/feed">Feed</NavLink>
                 <NavLink to="/profile">Profile</NavLink>
                 <NavLink to="/search">Search</NavLink>
+                <NavLink to="/defer">Defer</NavLink>
             </nav>
             <div>
                 Hello {name} | <button onClick={logout}>logout</button>

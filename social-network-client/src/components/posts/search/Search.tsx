@@ -1,10 +1,12 @@
-import { FormEvent, useEffect, useRef, useState } from 'react'
+import { FormEvent, memo, useEffect, useRef, useState } from 'react'
 import './Search.css'
 import useService from '../../../hooks/useService'
 import CommentsService from '../../../services/authAware/CommentsService'
 import Comment from '../../../models/comment/Comment'
 // import PostComment from '../comment/PostComment'
 import PostComment from '../commentSlow/PostCommentSlow'
+
+const MemoPostComment = memo(PostComment)
 
 function Search(): JSX.Element {
 
@@ -31,7 +33,7 @@ function Search(): JSX.Element {
     return (
         <div className='Search'>
             <input placeholder='search comments' onChange={queryChanged}/>
-            {filterredComments.map(comment => <PostComment key={comment.id} comment={comment}/>)}
+            {filterredComments.map(comment => <MemoPostComment key={comment.id} comment={comment}/>)}
         </div>
     )
 }
