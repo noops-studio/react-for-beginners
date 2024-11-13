@@ -3,6 +3,7 @@ import Profile from "../../posts/profile/Profile"
 import Feed from "../../posts/feed/Feed"
 import NotFound from "../not-found/NotFound"
 import EditPost from "../../posts/edit/EditPost"
+import Search from "../../posts/search/Search"
 
 function Routing(): JSX.Element {
     return (
@@ -11,6 +12,7 @@ function Routing(): JSX.Element {
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile/edit/:id" element={<EditPost />} />
             <Route path="/feed" element={<Feed />} />
+            <Route path="/search" element={<Search />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     )

@@ -23,6 +23,7 @@ function Header(): JSX.Element {
             <nav>
                 <NavLink to="/feed">Feed</NavLink>
                 <NavLink to="/profile">Profile</NavLink>
+                <NavLink to="/search">Search</NavLink>
             </nav>
             <div>
                 Hello {name} | <button onClick={logout}>logout</button>
