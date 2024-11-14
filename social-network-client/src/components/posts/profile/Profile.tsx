@@ -12,6 +12,7 @@ import useTitle from '../../../hooks/useTitle'
 import { AuthContext } from '../../auth/auth/Auth'
 import ProfileService from '../../../services/authAware/ProfileService'
 import useService from '../../../hooks/useService'
+import notify from '../../../util/notify'
 
 function Profile(): JSX.Element {
 
@@ -58,8 +59,9 @@ function Profile(): JSX.Element {
             const newPost = await profileService.create(draft)
             // setPosts([newPost, ...posts])
             dispatch(add(newPost))
+            notify.success("post added successfuly")
         } catch (e) {
-            alert(e)
+            notify.error(e)
         }
     }
 

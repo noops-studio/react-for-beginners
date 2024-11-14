@@ -22,10 +22,10 @@ function NewPost(props: NewPostProps): JSX.Element {
                         value: true,
                         message: 'you must provide a title'
                     },
-                    minLength: {
-                        value: 10,
-                        message: 'title must be at least 10 characters long'
-                    }
+                    // minLength: {
+                    //     value: 10,
+                    //     message: 'title must be at least 10 characters long'
+                    // }
                 })}/>
                 <span className='form-error'>{formState.errors.title?.message}</span>
                 <textarea placeholder='enter a body...' {...register('body', {
@@ -33,10 +33,10 @@ function NewPost(props: NewPostProps): JSX.Element {
                         value: true,
                         message: 'you must provide a body'
                     },
-                    minLength: {
-                        value: 20,
-                        message: 'body must be at least 20 characters long'
-                    }
+                    // minLength: {
+                    //     value: 20,
+                    //     message: 'body must be at least 20 characters long'
+                    // }
                 })}></textarea>
                 <span className='form-error'>{formState.errors.body?.message}</span>
                 <button>Submit</button>

@@ -1,4 +1,4 @@
-import { FormEvent, memo, useDeferredValue, useEffect, useState } from 'react'
+import { FormEvent, memo, useCallback, useDeferredValue, useEffect, useState } from 'react'
 import './Defer.css'
 import useService from '../../../hooks/useService'
 import CommentsService from '../../../services/authAware/CommentsService'
@@ -26,17 +26,26 @@ function Defer(): JSX.Element {
         setQuery(query)
     }
 
+    function someFunc() {
+        console.log('jsut a useless function for demo')
+    }
+
+    const someFuncMemoed = useCallback(() => {
+        someFunc()
+    }, [])
+
     return (
         <div className='Defer'>
             <input placeholder='search comments...' value={query} onChange={queryChanged}/>
-            <MemoDeferList comments={comments} query={deferredQuery}/>
+            <MemoDeferList comments={comments} query={deferredQuery} someFunc={someFuncMemoed}/>
         </div>
     )
 }
 
 interface DeferListProps {
     query: string,
-    comments: Comment[]
+    comments: Comment[],
+    someFunc: Function
 }
 function DeferList(props: DeferListProps): JSX.Element {
 

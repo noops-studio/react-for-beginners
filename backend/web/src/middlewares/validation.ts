@@ -9,7 +9,7 @@ export default function validation(validator: ObjectSchema) {
         } catch (e) {
             next({
                 status: 422,
-                message: e
+                message: e.message
             })
         }
     }
