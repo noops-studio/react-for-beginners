@@ -28,3 +28,28 @@ export async function getUserFollowers(req: Request, res: Response, next: NextFu
     })
     res.json(user.followers)
 }
+
+export async function follow(req: Request, res: Response, next: NextFunction) {
+    const userId = req.userId
+    const userToFollowId = req.params.id;
+    const follow = await Follow.create({
+        followerId: userId,
+        followeeId: userToFollowId
+    })
+    res.json(follow)
+}
+
+export async function unfollow(req: Request, res: Response, next: NextFunction) {
+    const userId = req.userId
+    const userToFollowId = req.params.id;
+    const follow = await Follow.findOne({
+        where: {
+            followerId: userId,
+            followeeId: userToFollowId
+        }
+    })
+    await follow.destroy()
+    res.json({
+        success: true
+    })
+}

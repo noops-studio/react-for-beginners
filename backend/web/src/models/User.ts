@@ -1,5 +1,4 @@
-import { Table, Column, Model, PrimaryKey, AllowNull, HasMany, BelongsToMany } from 'sequelize-typescript';
-import Post from './Post';
+import { AllowNull, BelongsToMany, Column, Model, PrimaryKey, Table } from 'sequelize-typescript';
 import Follow from './Follow';
 @Table({
     underscored: true,

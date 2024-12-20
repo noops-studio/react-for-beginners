@@ -1,9 +1,11 @@
 import { Router } from "express";
-import { getUserFollowers, getUserFollowing } from "../controllers/follows/controller";
+import { follow, getUserFollowers, getUserFollowing, unfollow } from "../controllers/follows/controller";
 
 const router = Router();
 
 router.get('/followers', getUserFollowers )
 router.get('/following', getUserFollowing )
+router.post('/follow/:id', follow )
+router.post('/unfollow/:id', unfollow )
 
 export default router;
