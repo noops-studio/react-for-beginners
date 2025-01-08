@@ -10,7 +10,7 @@ import Login from '../../auth/login/Login'
 
 function Layout(): JSX.Element {
 
-    const { jwt } = useContext(AuthContext)
+    const { jwt } = useContext(AuthContext)!
 
     return (
         <div className='Layout'>

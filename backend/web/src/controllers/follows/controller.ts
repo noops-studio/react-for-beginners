@@ -55,6 +55,14 @@ export async function follow(req: Request, res: Response, next: NextFunction) {
         followerId: userId,
         followeeId: userToFollowId
     })
+    const follower = await User.findByPk(userId)
+    const followee = await User.findByPk(userToFollowId)
+    const ret = req.ioSocket.emit('new-follow', {
+        from: req.headers['x-client-id'] || 'stam',
+        // follow: {...follow.get({plain: true})}, 
+        follower,
+        followee
+    })
     res.json(follow)
 }
 
@@ -67,6 +75,17 @@ export async function unfollow(req: Request, res: Response, next: NextFunction) 
             followerId: userId,
             followeeId: userToUnfollowId
         }
+    })
+    const follower = await User.findByPk(userId)
+    const followee = await User.findByPk(userToUnfollowId)
+    const ret = req.ioSocket.emit('new-unfollow', {
+        from: req.headers['x-client-id'] || 'stam',
+        follower,
+        followee
+        // unfollow: {
+        //     followerId: userId,
+        //     followeeId: userToUnfollowId
+        // }, 
     })
     res.json({
         success: true

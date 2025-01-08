@@ -8,7 +8,7 @@ import useUsername from '../../../hooks/useUsername'
 
 function Header(): JSX.Element {
 
-    const { jwt, updateJwt } = useContext(AuthContext)
+    const { jwt, updateJwt } = useContext(AuthContext)!
     const name = useUsername()
 
     function logout() {

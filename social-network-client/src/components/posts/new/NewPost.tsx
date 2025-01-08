@@ -3,7 +3,7 @@ import './NewPost.css'
 import PostDraft from '../../../models/post/PostDraft';
 
 interface NewPostProps {
-    createPost: Function
+    createPost (draft: PostDraft): Promise<void>
 }
 function NewPost(props: NewPostProps): JSX.Element {
 

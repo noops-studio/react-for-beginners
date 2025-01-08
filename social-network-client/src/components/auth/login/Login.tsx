@@ -9,7 +9,7 @@ function Login(): JSX.Element {
 
     const { register, handleSubmit, formState } = useForm<LoginModel>()
 
-    const { updateJwt } = useContext(AuthContext)
+    const { updateJwt } = useContext(AuthContext)!
 
     async function submit(login: LoginModel) {
         try {

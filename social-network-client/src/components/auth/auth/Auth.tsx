@@ -1,10 +1,14 @@
 import { createContext, PropsWithChildren, useState } from "react"
 
-export const AuthContext = createContext({
-    jwt: '',
-    updateJwt: (jwt: string) => {}
-})
-
+// export const AuthContext = createContext({
+//     jwt: '',
+//     updateJwt: (jwt: string) => {}
+// })
+interface AuthContextInterface {
+    jwt: string, 
+    updateJwt(jwt:string): void
+}
+export const AuthContext = createContext<AuthContextInterface | null>(null)
 function Auth(props: PropsWithChildren): JSX.Element {
 
     const [ jwt, setJwt ] = useState<string>('')

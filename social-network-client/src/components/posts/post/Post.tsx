@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 interface PostProps {
     post: PostModel,
-    removePost: Function
+    removePost(id: string): Promise<void>
 }
 function Post(props: PostProps): JSX.Element {
 

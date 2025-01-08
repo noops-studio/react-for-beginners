@@ -6,7 +6,7 @@ import { SocketContext } from "../components/socket/dispatcher/SocketDispatcher"
 
 export default function useService<T extends AuthAwareService>(Service: { new(axiosInstance: AxiosInstance): T}): T {
 
-    const { jwt } = useContext(AuthContext)
+    const { jwt } = useContext(AuthContext)!
     const { xClientId } = useContext(SocketContext)
 
     const axiosInstance = axios.create({})
