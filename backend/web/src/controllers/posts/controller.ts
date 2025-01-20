@@ -24,7 +24,15 @@ export async function getPerUser(req: Request, res: Response, next: NextFunction
 
 export async function getOne(req: Request, res: Response, next: NextFunction) {
     const id = req.params.id;
-    const post = await Post.findByPk(id)
+    const post = await Post.findByPk(id, {
+        include: [
+            {
+                model: Comment,
+                include: [User]
+            }, 
+            User
+        ]
+    })
     if (!post) return next ({
         status: 404,
         message: 'post id not found'
