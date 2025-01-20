@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 import './NewPost.css'
 import PostDraft from '../../../models/post/PostDraft';
+import { useState } from 'react';
 
 interface NewPostProps {
     createPost (draft: PostDraft): Promise<void>
@@ -9,9 +10,18 @@ function NewPost(props: NewPostProps): JSX.Element {
 
     const { register, handleSubmit, reset, formState } = useForm<PostDraft>();
 
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+
     async function submit(draft: PostDraft) {
-        await props.createPost(draft)
-        reset()
+        setIsSubmitting(true)
+        try {
+            await props.createPost(draft)
+            reset()
+        } catch (e) {
+            throw e
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
     return (
@@ -39,7 +49,10 @@ function NewPost(props: NewPostProps): JSX.Element {
                     // }
                 })}></textarea>
                 <span className='form-error'>{formState.errors.body?.message}</span>
-                <button>Submit</button>
+                {!isSubmitting && <button>Submit</button>}
+                {isSubmitting && <p>creating new post...</p>}
+
+                
             </form>
         </div>
     )

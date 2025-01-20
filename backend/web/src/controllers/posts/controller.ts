@@ -43,7 +43,15 @@ export async function remove(req: Request, res: Response, next: NextFunction) {
 
 export async function update(req: Request, res: Response, next: NextFunction) {
     const id = req.params.id;
-    const post = await Post.findByPk(id)
+    const post = await Post.findByPk(id, {
+        include: [
+            {
+                model: Comment,
+                include: [User]
+            }, 
+            User
+        ]
+    })
     const { title, body } = req.body;
     post.title = title;
     post.body = body;
